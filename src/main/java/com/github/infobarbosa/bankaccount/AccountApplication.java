@@ -1,4 +1,4 @@
-package com.github.infobarbosa.account;
+package com.github.infobarbosa.bankaccount;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

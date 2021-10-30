@@ -1,7 +1,8 @@
-package com.github.infobarbosa.account;
+package com.github.infobarbosa.bankaccount.account;
 
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,13 +16,19 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "CUSTOMER_ID")
     private Long customerId;
     private String name;
     private Float balance;
 
-    public Account(Long id, Long customerId, String name){
+    public Account(){}
+
+    public Account(Long id, Long customerId, String name, Float balance){
         this.id = id;
+        this.customerId = customerId;
         this.name = name;
+        this.balance = balance;
     }
 
     public Long getId() {
@@ -57,10 +64,7 @@ public class Account {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
-        return Objects.equals(id, account.id) &&
-            Objects.equals(customerId, account.customerId) &&
-            Objects.equals(name, account.name) &&
-            Objects.equals(balance, account.balance);
+        return Objects.equals(id, account.id);
     }
 
     @Override
