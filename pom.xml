@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.github.infobarbosa</groupId>
-	<artifactId>account</artifactId>
+	<artifactId>bankaccount</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<name>account</name>
+	<name>bankaccount</name>
 	<description>Tirando a ferrugem do meu Java</description>
 	<properties>
 		<java.version>11</java.version>
@@ -62,7 +62,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<repository>infobarbosa/account</repository>
+					<repository>infobarbosa/bankaccount</repository>
 					<tag>${project.version}</tag>
 				</configuration>
 			</plugin>
