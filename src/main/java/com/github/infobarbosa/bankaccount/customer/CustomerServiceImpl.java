@@ -29,9 +29,17 @@ public class CustomerServiceImpl implements CustomerService{
         return created;
     }
 
-    public Customer update(Customer customer){
+    public Customer update(Customer customer, Long id){
         logger.debug( "Atualizando customer: " + customer.toString() );
-        Customer updated = customerRepository.save(customer);
-        return updated;
+
+        return customerRepository.findById(id)
+            .map(employee -> {
+                employee.setName(customer.getName());
+                return customerRepository.save( customer );
+            })
+            .orElseGet(() -> {
+                customer.setId(id);
+                return customerRepository.save( customer );
+            });
     }
 }

@@ -7,7 +7,7 @@ public interface CustomerService {
     
 
     public Customer create(Customer customer);
-    public Customer update(Customer customer);
+    public Customer update(Customer customer, Long id);
 
     public Optional<Customer> get(Long id);
     public List<Customer> getAll();
