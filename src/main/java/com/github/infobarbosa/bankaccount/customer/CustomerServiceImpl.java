@@ -42,4 +42,8 @@ public class CustomerServiceImpl implements CustomerService{
                 return customerRepository.save( customer );
             });
     }
+
+    public void delete( Long id ){
+        customerRepository.deleteById(id);
+    }
 }

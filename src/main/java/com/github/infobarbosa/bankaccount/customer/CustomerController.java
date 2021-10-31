@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,5 +40,11 @@ public class CustomerController {
     @ResponseStatus(code = HttpStatus.OK)
     public Customer update(@RequestBody Customer customer, @PathVariable Long id){
         return customerService.update( customer, id );
+    }
+
+    @DeleteMapping(value = "/customers/{id}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id){
+        customerService.delete( id );
     }
 }

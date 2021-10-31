@@ -11,4 +11,5 @@ public interface CustomerService {
 
     public Optional<Customer> get(Long id);
     public List<Customer> getAll();
+    public void delete(Long id);
 }
