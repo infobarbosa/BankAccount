@@ -24,6 +24,12 @@ public class Account {
 
     public Account(){}
 
+    public Account(Long customerId, String name, Float balance){
+        this.customerId = customerId;
+        this.name = name;
+        this.balance = balance;
+    }
+
     public Account(Long id, Long customerId, String name, Float balance){
         this.id = id;
         this.customerId = customerId;
