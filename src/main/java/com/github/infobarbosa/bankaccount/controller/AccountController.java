@@ -1,6 +1,9 @@
-package com.github.infobarbosa.bankaccount.account;
+package com.github.infobarbosa.bankaccount.controller;
 
 import java.util.List;
+
+import com.github.infobarbosa.bankaccount.model.CheckingAccount;
+import com.github.infobarbosa.bankaccount.service.AccountService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -14,7 +17,7 @@ public class AccountController {
     private AccountService accountService;
 
     @GetMapping(value = "/accounts", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Account> getAllAccounts(){
+    public List<CheckingAccount> getAllAccounts(){
         return accountService.findAll();
     }
 }

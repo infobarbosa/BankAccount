@@ -1,4 +1,4 @@
-package com.github.infobarbosa.bankaccount.transaction;
+package com.github.infobarbosa.bankaccount.model;
 
 import java.util.Date;
 import java.util.Objects;

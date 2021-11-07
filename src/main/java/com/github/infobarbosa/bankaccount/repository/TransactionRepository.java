@@ -1,4 +1,6 @@
-package com.github.infobarbosa.bankaccount.transaction;
+package com.github.infobarbosa.bankaccount.repository;
+
+import com.github.infobarbosa.bankaccount.model.Transaction;
 
 import org.springframework.data.repository.CrudRepository;
 

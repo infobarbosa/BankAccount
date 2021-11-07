@@ -1,4 +1,4 @@
-package com.github.infobarbosa.bankaccount.customer;
+package com.github.infobarbosa.bankaccount.model;
 
 import java.util.Objects;
 

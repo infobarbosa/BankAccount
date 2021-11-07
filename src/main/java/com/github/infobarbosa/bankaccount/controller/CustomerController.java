@@ -1,7 +1,10 @@
-package com.github.infobarbosa.bankaccount.customer;
+package com.github.infobarbosa.bankaccount.controller;
 
 import java.util.List;
 import java.util.Optional;
+
+import com.github.infobarbosa.bankaccount.model.Customer;
+import com.github.infobarbosa.bankaccount.service.CustomerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

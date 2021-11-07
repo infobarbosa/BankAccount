@@ -1,4 +1,7 @@
-package com.github.infobarbosa.bankaccount.transaction;
+package com.github.infobarbosa.bankaccount.controller;
+
+import com.github.infobarbosa.bankaccount.model.Transaction;
+import com.github.infobarbosa.bankaccount.service.TransactionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

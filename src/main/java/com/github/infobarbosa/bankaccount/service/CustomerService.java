@@ -1,7 +1,9 @@
-package com.github.infobarbosa.bankaccount.customer;
+package com.github.infobarbosa.bankaccount.service;
 
 import java.util.List;
 import java.util.Optional;
+
+import com.github.infobarbosa.bankaccount.model.Customer;
 
 public interface CustomerService {
     

@@ -1,4 +1,4 @@
-package com.github.infobarbosa.bankaccount.account;
+package com.github.infobarbosa.bankaccount.model;
 
 import java.util.Objects;
 
@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="TBL_ACCOUNTS")
-public class Account {
+public class CheckingAccount {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,15 +22,15 @@ public class Account {
     private String name;
     private Float balance;
 
-    public Account(){}
+    public CheckingAccount(){}
 
-    public Account(Long customerId, String name, Float balance){
+    public CheckingAccount(Long customerId, String name, Float balance){
         this.customerId = customerId;
         this.name = name;
         this.balance = balance;
     }
 
-    public Account(Long id, Long customerId, String name, Float balance){
+    public CheckingAccount(Long id, Long customerId, String name, Float balance){
         this.id = id;
         this.customerId = customerId;
         this.name = name;
@@ -69,7 +69,7 @@ public class Account {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Account account = (Account) o;
+        CheckingAccount account = (CheckingAccount) o;
         return Objects.equals(id, account.id);
     }
 

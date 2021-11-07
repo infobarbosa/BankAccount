@@ -1,7 +1,10 @@
-package com.github.infobarbosa.bankaccount.customer;
+package com.github.infobarbosa.bankaccount.service;
 
 import java.util.List;
 import java.util.Optional;
+
+import com.github.infobarbosa.bankaccount.model.Customer;
+import com.github.infobarbosa.bankaccount.repository.CustomerRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,9 +1,9 @@
 package com.github.infobarbosa.bankaccount;
 
-import com.github.infobarbosa.bankaccount.account.Account;
-import com.github.infobarbosa.bankaccount.account.AccountRepository;
-import com.github.infobarbosa.bankaccount.customer.Customer;
-import com.github.infobarbosa.bankaccount.customer.CustomerRepository;
+import com.github.infobarbosa.bankaccount.model.CheckingAccount;
+import com.github.infobarbosa.bankaccount.model.Customer;
+import com.github.infobarbosa.bankaccount.repository.AccountRepository;
+import com.github.infobarbosa.bankaccount.repository.CustomerRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,8 +30,8 @@ class LoadDatabase {
   CommandLineRunner initDatabaseA(AccountRepository repository) {
 
     return args -> {
-      log.info("Preloading " + repository.save(new Account(1L, "Conta Corrente", 0.0f)));
-      log.info("Preloading " + repository.save(new Account(2L, "Conta Corrente", 10.0f)));
+      log.info("Preloading " + repository.save(new CheckingAccount(1L, "Conta Corrente", 0.0f)));
+      log.info("Preloading " + repository.save(new CheckingAccount(2L, "Conta Corrente", 10.0f)));
     };
   }
 }
