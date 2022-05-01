@@ -1,4 +1,4 @@
-package com.github.infobarbosa.bankaccount;
+package com.github.infobarbosa.bankaccount.config;
 
 import com.github.infobarbosa.bankaccount.model.CheckingAccount;
 import com.github.infobarbosa.bankaccount.model.Customer;
