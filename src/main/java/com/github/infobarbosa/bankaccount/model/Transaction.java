@@ -89,15 +89,6 @@ public class Transaction {
         return sb.toString();
     }
 
-    public enum TransactionType{
-        TRANSFER,
-        DEBIT,
-        CREDIT;
-    }
-
-    public TransactionType getTransactionType() {
-        return this.transactionType;
-    }
 
     /**
      * @return Long return the id
@@ -111,6 +102,10 @@ public class Transaction {
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public TransactionType getTransactionType() {
+        return this.transactionType;
     }
 
     /**
