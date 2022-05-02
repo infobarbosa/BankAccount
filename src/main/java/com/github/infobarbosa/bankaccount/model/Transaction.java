@@ -3,12 +3,15 @@ package com.github.infobarbosa.bankaccount.model;
 import java.util.Date;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="TBL_TRANSACTIONS")
 public class Transaction {
     
     public Transaction(){}
@@ -16,8 +19,8 @@ public class Transaction {
         this.id = id;
         this.amount = amount;
         this.date = date;
-        this.creditAccount = creditAccount;
-        this.debitAccount = debitAccount;
+        this.creditAccountId = creditAccount;
+        this.debitAccountId = debitAccount;
         this.transactionType = transactionType;
     }
 
@@ -25,26 +28,31 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    @Column(name="AMOUNT", nullable = false)
     private Float amount;
+    @Column(name="TRANSACTION_DATE", nullable = false)
     private Date date;
-    private Long creditAccount;
-    private Long debitAccount;
+    @Column(name="CREDIT_ACCOUNT_ID")
+    private Long creditAccountId;
+    @Column(name="DEBIT_ACCOUNT_ID")
+    private Long debitAccountId;
+    @Column(name="TRANSACTION_TYPE", nullable = false)
     private TransactionType transactionType;
 
     public Long getDebitAccount() {
-        return debitAccount;
+        return debitAccountId;
     }
 
     public void setDebitAccount(Long debitAccount) {
-        this.debitAccount = debitAccount;
+        this.debitAccountId = debitAccount;
     }
 
     public Long getCreditAccount() {
-        return creditAccount;
+        return creditAccountId;
     }
 
     public void setCreditAccount(Long creditAccount) {
-        this.creditAccount = creditAccount;
+        this.creditAccountId = creditAccount;
     }
 
     public Date getDate() {
@@ -82,8 +90,8 @@ public class Transaction {
         sb.append("id=").append(id);
         sb.append("amount=").append(this.amount);
         sb.append(", date='").append(this.date).append('\'');
-        sb.append("debitAccount=").append(this.debitAccount);
-        sb.append("creditAccount=").append(this.creditAccount);
+        sb.append("debitAccount=").append(this.debitAccountId);
+        sb.append("creditAccount=").append(this.creditAccountId);
         sb.append("transactionType=").append(this.transactionType);
         sb.append('}');
         return sb.toString();

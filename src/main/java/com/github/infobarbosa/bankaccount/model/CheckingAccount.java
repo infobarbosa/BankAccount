@@ -17,9 +17,11 @@ public class CheckingAccount {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "CUSTOMER_ID")
+    @Column(name = "CUSTOMER_ID", nullable = false)
     private Long customerId;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private Float balance;
 
     public CheckingAccount(){}
@@ -82,9 +84,9 @@ public class CheckingAccount {
     public String toString() {
         final StringBuilder sb = new StringBuilder("Account{");
         sb.append("id=").append(id);
-        sb.append("customerId=").append(customerId);
+        sb.append(", customerId=").append(customerId);
         sb.append(", name='").append(name).append('\'');
-        sb.append("balance=").append(balance);
+        sb.append(", balance=").append(balance);
         sb.append('}');
         return sb.toString();
     }

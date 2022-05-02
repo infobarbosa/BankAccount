@@ -4,23 +4,27 @@ import java.util.Date;
 import java.util.Objects;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "TBL_LEDGER")
 public class BookEntry {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(nullable=false)
+    @Column(name="ENTRY_AMOUNT", nullable=false)
     private Float amount;
-    @Column(nullable=false)
+    @Column(name="ENTRY_DATE", nullable=false)
     private Date date;
-    @Column(nullable=false)
+    @Column(name="ACCOUNT_ID", nullable=false)
     private Long accountId;
-    @Column(nullable=false)
+    @Column(name="ENTRY_TYPE", nullable=false)
     private BookEntryType bookEntryType;
     
     public BookEntry(){}
