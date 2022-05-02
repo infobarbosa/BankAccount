@@ -20,7 +20,7 @@ create table tbl_transactions(
     credit_account_id   int,
     amount              float not null,
     transaction_date    timestamp not null,
-    transaction_type    varchar(100) not null,
+    transaction_type    varchar(100) not null
 );
 
 create table tbl_ledger(
@@ -28,5 +28,5 @@ create table tbl_ledger(
     account_id      int,
     entry_amount    float,
     entry_date      timestamp,
-    entry_type      varchar(100),
+    entry_type      varchar(100)
 );
