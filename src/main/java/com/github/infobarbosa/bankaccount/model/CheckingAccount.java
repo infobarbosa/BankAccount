@@ -41,6 +41,7 @@ public class CheckingAccount {
         this.customerId = customerId;
         this.name = name;
         this.balance = balance;
+        this.accountStatus = accountStatus;
     }
 
     public Long getId() {

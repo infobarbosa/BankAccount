@@ -25,4 +25,16 @@ public class AccountServiceImpl implements AccountService{
     public Optional<CheckingAccount> findById(Long accountId) {
         return repository.findById(accountId);
     }
+
+    @Override
+    public CheckingAccount createAccount(CheckingAccount checkingAccount) {
+        repository.save(checkingAccount);
+        return checkingAccount;
+    }
+
+    @Override
+    public CheckingAccount updateAccount(CheckingAccount checkingAccount) {
+        repository.save(checkingAccount);
+        return checkingAccount;
+    }
 }
