@@ -1,5 +1,6 @@
 package com.github.infobarbosa.bankaccount.config;
 
+import com.github.infobarbosa.bankaccount.model.AccountStatus;
 import com.github.infobarbosa.bankaccount.model.CheckingAccount;
 import com.github.infobarbosa.bankaccount.model.Customer;
 import com.github.infobarbosa.bankaccount.repository.AccountRepository;
@@ -30,8 +31,8 @@ class LoadDatabase {
   CommandLineRunner initDatabaseA(AccountRepository repository) {
 
     return args -> {
-      log.info("Preloading " + repository.save(new CheckingAccount(1L, "Conta Corrente", 0.0f)));
-      log.info("Preloading " + repository.save(new CheckingAccount(2L, "Conta Corrente", 10.0f)));
+      log.info("Preloading " + repository.save(new CheckingAccount(1L, "Conta Corrente", 0.0f, AccountStatus.ACTIVE)));
+      log.info("Preloading " + repository.save(new CheckingAccount(2L, "Conta Corrente", 10.0f, AccountStatus.ACTIVE)));
     };
   }
 }

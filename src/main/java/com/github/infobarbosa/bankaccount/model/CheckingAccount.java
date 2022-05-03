@@ -24,15 +24,19 @@ public class CheckingAccount {
     @Column(nullable = false)
     private Float balance;
 
+    @Column(nullable = false)
+    private AccountStatus accountStatus;
+
     public CheckingAccount(){}
 
-    public CheckingAccount(Long customerId, String name, Float balance){
+    public CheckingAccount(Long customerId, String name, Float balance, AccountStatus accountStatus){
         this.customerId = customerId;
         this.name = name;
         this.balance = balance;
+        this.accountStatus = accountStatus;
     }
 
-    public CheckingAccount(Long id, Long customerId, String name, Float balance){
+    public CheckingAccount(Long id, Long customerId, String name, Float balance, AccountStatus accountStatus){
         this.id = id;
         this.customerId = customerId;
         this.name = name;
@@ -65,6 +69,14 @@ public class CheckingAccount {
 
     public void setBalance(Float balance){
         this.balance = balance;
+    }
+
+    public AccountStatus getAccountStatus(){
+        return this.accountStatus;
+    }
+
+    public void setAccountStatus(AccountStatus accountStatus){
+        this.accountStatus = accountStatus;
     }
 
     @Override

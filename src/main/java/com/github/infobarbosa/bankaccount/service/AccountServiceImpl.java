@@ -1,6 +1,7 @@
 package com.github.infobarbosa.bankaccount.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.github.infobarbosa.bankaccount.model.CheckingAccount;
 import com.github.infobarbosa.bankaccount.repository.AccountRepository;
@@ -18,5 +19,10 @@ public class AccountServiceImpl implements AccountService{
     public List<CheckingAccount> findAll() {
 
         return (List<CheckingAccount>) repository.findAll();
+    }
+
+    @Override
+    public Optional<CheckingAccount> findById(Long accountId) {
+        return repository.findById(accountId);
     }
 }

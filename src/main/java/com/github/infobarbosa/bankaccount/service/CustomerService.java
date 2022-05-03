@@ -6,8 +6,6 @@ import java.util.Optional;
 import com.github.infobarbosa.bankaccount.model.Customer;
 
 public interface CustomerService {
-    
-
     public Customer create(Customer customer);
     public Customer update(Customer customer, Long id);
 

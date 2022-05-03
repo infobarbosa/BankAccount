@@ -11,7 +11,8 @@ create table tbl_accounts(
     id              int auto_increment primary key,
     customer_id     int,
     name            varchar(100),
-    balance         float
+    balance         float,
+    account_status  varchar(100)
 );
 
 create table tbl_transactions(

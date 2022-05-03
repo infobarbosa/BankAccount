@@ -12,7 +12,9 @@ import com.github.infobarbosa.bankaccount.model.Transaction;
 import com.github.infobarbosa.bankaccount.repository.TransactionRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class TransactionServiceImpl implements TransactionService{
     
     @Autowired
