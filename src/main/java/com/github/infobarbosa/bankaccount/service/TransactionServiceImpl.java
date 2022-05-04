@@ -63,7 +63,7 @@ public class TransactionServiceImpl implements TransactionService{
     }
 
     private void processTransfer(Transaction transaction) {
-        //TODO: Verificar se a conta de débito tem saldo
+        //TODO: 3. verificar se a conta de débito tem saldo
 
         //Entrada de débito no livro razão
         BookEntry debitBookEntry = new BookEntry();

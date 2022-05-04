@@ -12,8 +12,8 @@ public interface AccountService {
     public Optional<CheckingAccount> findById(Long accountId);
 
     public CheckingAccount createAccount(CheckingAccount checkingAccount);
-    public CheckingAccount updateAccount(CheckingAccount checkingAccount);
-    public void activateAccount(CheckingAccount checkingAccount);
-    public void inactivateAccount(CheckingAccount checkingAccount);
+    public void updateAccount(CheckingAccount checkingAccount);
+    public void activateAccount(Long accountId);
+    public void inactivateAccount(Long accountId);
 
 }
