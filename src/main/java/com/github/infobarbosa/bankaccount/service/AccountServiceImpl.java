@@ -76,4 +76,10 @@ public class AccountServiceImpl implements AccountService{
         }
         
     }
+
+    @Override
+    public void updateBalance(Long accountId, Float balance) {
+        repository.updateAccountBalance(accountId, balance);
+        
+    }
 }
