@@ -19,27 +19,26 @@ public class CheckingAccount {
 
     @Column(name = "CUSTOMER_ID", nullable = false)
     private Long customerId;
-    @Column(nullable = false)
-    private String name;
-    @Column(nullable = false)
+    @Column(name="ACCOUNT_DESCRIPTION", nullable = false)
+    private String description;
+    @Column(name="ACCOUNT_BALANCE", nullable = false)
     private Float balance;
-
-    @Column(nullable = false)
+    @Column(name="ACCOUNT_STATUS", nullable = false)
     private AccountStatus accountStatus;
 
     public CheckingAccount(){}
 
-    public CheckingAccount(Long customerId, String name, Float balance, AccountStatus accountStatus){
+    public CheckingAccount(Long customerId, String description, Float balance, AccountStatus accountStatus){
         this.customerId = customerId;
-        this.name = name;
+        this.description = description;
         this.balance = balance;
         this.accountStatus = accountStatus;
     }
 
-    public CheckingAccount(Long id, Long customerId, String name, Float balance, AccountStatus accountStatus){
+    public CheckingAccount(Long id, Long customerId, String description, Float balance, AccountStatus accountStatus){
         this.id = id;
         this.customerId = customerId;
-        this.name = name;
+        this.description = description;
         this.balance = balance;
         this.accountStatus = accountStatus;
     }
@@ -56,12 +55,12 @@ public class CheckingAccount {
         this.customerId = customerId;
     }
 
-    public String getName() {
-        return this.name;
+    public String getDescription() {
+        return this.description;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Float getBalance(){
@@ -90,7 +89,7 @@ public class CheckingAccount {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, customerId, name, balance);
+        return Objects.hash(id, customerId, description, balance);
     }
 
     @Override
@@ -98,7 +97,7 @@ public class CheckingAccount {
         final StringBuilder sb = new StringBuilder("Account{");
         sb.append("id=").append(id);
         sb.append(", customerId=").append(customerId);
-        sb.append(", name='").append(name).append('\'');
+        sb.append(", name='").append(description).append('\'');
         sb.append(", balance=").append(balance);
         sb.append('}');
         return sb.toString();

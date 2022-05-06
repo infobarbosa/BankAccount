@@ -12,4 +12,8 @@ public class AccountStatusDTO {
     public AccountStatus getAccountStatus(){
         return this.accountStatus;
     }
+
+    public String toString(){
+        return "AccountStatusDTO. accountStatus: " + accountStatus;
+    }
 }

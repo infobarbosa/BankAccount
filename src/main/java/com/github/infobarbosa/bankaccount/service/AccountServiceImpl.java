@@ -51,35 +51,27 @@ public class AccountServiceImpl implements AccountService{
 
     @Override
     public void activateAccount(Long accountId){
-        Optional<CheckingAccount> optionalAcc = repository.findById(accountId);
-        if(optionalAcc.isPresent()){
-            CheckingAccount acc = optionalAcc.get();
-            acc.setAccountStatus(AccountStatus.ACTIVE);
-            repository.save(acc);
-        }
-        else{
+        Optional<CheckingAccount> opt = repository.findById(accountId);
+        if(opt.isPresent()){
             throw new AccountNotFoundException("Account not found: " + accountId);
         }
-        
+
+        repository.changeAccountStatus(accountId, AccountStatus.ACTIVE);
     }
 
     @Override
     public void inactivateAccount(Long accountId) {
-        Optional<CheckingAccount> optionalAcc = repository.findById(accountId);
-        if(optionalAcc.isPresent()){
-            CheckingAccount acc = optionalAcc.get();
-            acc.setAccountStatus(AccountStatus.INACTIVE);
-            repository.save(acc);
-        }
-        else{
+        Optional<CheckingAccount> opt = repository.findById(accountId);
+        if(!opt.isPresent()){
             throw new AccountNotFoundException("Account not found: " + accountId);
         }
-        
+
+        repository.changeAccountStatus(accountId, AccountStatus.INACTIVE);        
     }
 
     @Override
-    public void updateBalance(Long accountId, Float balance) {
-        repository.updateAccountBalance(accountId, balance);
+    public void changeAccountBalance(Long accountId, Float balance) {
+        repository.changeAccountBalance(accountId, balance);
         
     }
 }

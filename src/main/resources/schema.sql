@@ -8,11 +8,11 @@ create table tbl_customers(
 drop table if exists tbl_accounts;
 
 create table tbl_accounts(
-    id              int auto_increment primary key,
-    customer_id     int not null,
-    name            varchar(100) not null,
-    balance         float not null,
-    account_status  varchar(100) not null
+    id                      int auto_increment primary key,
+    customer_id             int not null,
+    account_description     varchar(100) not null,
+    account_balance         float not null,
+    account_status          varchar(100) not null
 );
 
 create table tbl_transactions(

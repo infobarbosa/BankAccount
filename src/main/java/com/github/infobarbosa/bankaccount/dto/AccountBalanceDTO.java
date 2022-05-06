@@ -10,4 +10,8 @@ public class AccountBalanceDTO {
     public Float getAccountBalance(){
         return this.balance;
     }
+
+    public String toString(){
+        return "AccountBalanceDTO. balance: " + balance;
+    }
 }

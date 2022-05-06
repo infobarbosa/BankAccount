@@ -16,5 +16,5 @@ public interface AccountService {
     public void activateAccount(Long accountId);
     public void inactivateAccount(Long accountId);
 
-    public void updateBalance(Long accountId, Float balance);
+    public void changeAccountBalance(Long accountId, Float balance);
 }

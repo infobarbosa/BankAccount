@@ -3,6 +3,7 @@ package com.github.infobarbosa.bankaccount.controller;
 import java.util.List;
 import java.util.Optional;
 
+import com.github.infobarbosa.bankaccount.dto.AccountBalanceDTO;
 import com.github.infobarbosa.bankaccount.dto.AccountStatusDTO;
 import com.github.infobarbosa.bankaccount.model.AccountStatus;
 import com.github.infobarbosa.bankaccount.model.CheckingAccount;
@@ -32,14 +33,14 @@ public class AccountController {
 
     @GetMapping(value = "/accounts", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity getAllAccounts(){
+    public ResponseEntity<List<CheckingAccount>> getAllAccounts(){
         List<CheckingAccount> accountList = accountService.findAll();
         return new ResponseEntity<List<CheckingAccount>>(accountList, HttpStatus.OK);
     }
 
     @GetMapping(value="/accounts/{accountId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity getAccountById(@PathVariable(name="accountId") Long accountId){
+    public ResponseEntity<CheckingAccount> getAccountById(@PathVariable(name="accountId") Long accountId){
         Optional<CheckingAccount> optAccount = accountService.findById(accountId);
         if(optAccount.isPresent()){
             CheckingAccount acc = optAccount.get();
@@ -50,24 +51,30 @@ public class AccountController {
 
     @PostMapping(value="/accounts")
     @ResponseStatus(HttpStatus.CREATED)
-    public CheckingAccount createAccount(@RequestBody CheckingAccount checkingAccount){
+    public ResponseEntity<CheckingAccount> createAccount(@RequestBody CheckingAccount checkingAccount){
         CheckingAccount acc = accountService.createAccount(checkingAccount);
-        return acc;
+        return new ResponseEntity<CheckingAccount>(acc, HttpStatus.CREATED);
     }
 
     @PutMapping(value="/accounts/{id}")
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void updateAccount(@RequestBody CheckingAccount checkingAccount){
+    @ResponseStatus(value = HttpStatus.OK)
+    public ResponseEntity updateAccount(@RequestBody CheckingAccount checkingAccount){
         accountService.updateAccount(checkingAccount);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping(value="/accounts/{id}/status")
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void changeAccountStatus(@PathVariable(name = "id") Long accountId, @RequestBody AccountStatusDTO accountStatus){
-        CheckingAccount acc = accountService.findById(accountId).get();
-        
+    @ResponseStatus(value = HttpStatus.OK)
+    public ResponseEntity changeAccountStatus(@PathVariable(name = "id") Long accountId, @RequestBody AccountStatusDTO accountStatus){
         logger.info("valor de accountStatus: " + accountStatus);
-    
+
+        Optional<CheckingAccount> opt = accountService.findById(accountId);
+        
+        if(!opt.isPresent()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        CheckingAccount acc = opt.get();
         if( !acc.getAccountStatus().equals(accountStatus.getAccountStatus())){
             switch (accountStatus.getAccountStatus()) {
                 case ACTIVE:
@@ -78,20 +85,24 @@ public class AccountController {
                 default:
                     break;
             }
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.OK);
         }
     }
 
     @PutMapping(value="/accounts/{id}/balance")
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public ResponseEntity changeAccountBalance(@PathVariable(name = "id") Long accountId, @RequestBody Float balance){
+    @ResponseStatus(value = HttpStatus.OK)
+    public ResponseEntity changeAccountBalance(@PathVariable(name = "id") Long accountId, @RequestBody AccountBalanceDTO balance){
         Optional<CheckingAccount> oAcc = accountService.findById(accountId);
         if(!oAcc.isPresent()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        logger.info("valor de balance: " + balance);
+        logger.info("valor de balance: " + balance.getAccountBalance());
     
-        accountService.updateBalance(accountId, balance);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        accountService.changeAccountBalance(accountId, balance.getAccountBalance());
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
