@@ -66,11 +66,15 @@ public class AccountServiceImpl implements AccountService{
             throw new AccountNotFoundException("Account not found: " + accountId);
         }
 
+        //TODO 1. validar se o chamador está tentando inativar uma conta que ainda tenha saldo positivo. Necessário sacar primeiro antes de inativar.
+
         repository.changeAccountStatus(accountId, AccountStatus.INACTIVE);        
     }
 
     @Override
     public void changeAccountBalance(Long accountId, Float balance) {
+        //TODO 1. validar se o chamador está tentando alterar o saldo de uma conta com status inativo.
+
         repository.changeAccountBalance(accountId, balance);
         
     }
