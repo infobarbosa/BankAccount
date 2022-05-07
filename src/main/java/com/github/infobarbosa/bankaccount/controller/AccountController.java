@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@ResponseBody
 public class AccountController {
     private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
 
@@ -32,8 +33,8 @@ public class AccountController {
     private AccountService accountService;
 
     @GetMapping(value = "/accounts", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
     public ResponseEntity<List<CheckingAccount>> getAllAccounts(){
+        logger.info("getAllAccounts chamado...");
         List<CheckingAccount> accountList = accountService.findAll();
         return new ResponseEntity<List<CheckingAccount>>(accountList, HttpStatus.OK);
     }
@@ -58,14 +59,14 @@ public class AccountController {
 
     @PutMapping(value="/accounts/{id}")
     @ResponseStatus(value = HttpStatus.OK)
-    public ResponseEntity updateAccount(@RequestBody CheckingAccount checkingAccount){
+    public ResponseEntity<Void> updateAccount(@RequestBody CheckingAccount checkingAccount){
         accountService.updateAccount(checkingAccount);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping(value="/accounts/{id}/status")
     @ResponseStatus(value = HttpStatus.OK)
-    public ResponseEntity changeAccountStatus(@PathVariable(name = "id") Long accountId, @RequestBody AccountStatusDTO accountStatus){
+    public ResponseEntity<Void> changeAccountStatus(@PathVariable(name = "id") Long accountId, @RequestBody AccountStatusDTO accountStatus){
         logger.info("valor de accountStatus: " + accountStatus);
 
         Optional<CheckingAccount> opt = accountService.findById(accountId);
@@ -94,14 +95,14 @@ public class AccountController {
 
     @PutMapping(value="/accounts/{id}/balance")
     @ResponseStatus(value = HttpStatus.OK)
-    public ResponseEntity changeAccountBalance(@PathVariable(name = "id") Long accountId, @RequestBody AccountBalanceDTO balance){
+    public ResponseEntity<Void> changeAccountBalance(@PathVariable(name = "id") Long accountId, @RequestBody AccountBalanceDTO balance){
         Optional<CheckingAccount> oAcc = accountService.findById(accountId);
         if(!oAcc.isPresent()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        logger.info("valor de balance: " + balance.getAccountBalance());
+        logger.info("valor de balance: " + balance.getBalance());
     
-        accountService.changeAccountBalance(accountId, balance.getAccountBalance());
+        accountService.changeAccountBalance(accountId, balance.getBalance());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
