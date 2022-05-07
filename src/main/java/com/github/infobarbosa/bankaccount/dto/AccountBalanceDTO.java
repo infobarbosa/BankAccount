@@ -3,11 +3,11 @@ package com.github.infobarbosa.bankaccount.dto;
 public class AccountBalanceDTO {
     private Float balance;
 
-    public void setAccountBalance(Float balance){
+    public void setBalance(Float balance){
         this.balance = balance;
     }
 
-    public Float getAccountBalance(){
+    public Float getBalance(){
         return this.balance;
     }
 
