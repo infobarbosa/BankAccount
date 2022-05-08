@@ -11,6 +11,8 @@ phases:
   post_build:
     commands:
       - echo post build completed on `date`
+      - echo `pwd`
+      - ls -latr
 artifacts:
   files:
-    - target/bankaccount-1.0-SNAPSHOT.jar bankaccount.jar
+    - ./target/bankaccount-1.0-SNAPSHOT.jar bankaccount.jar
