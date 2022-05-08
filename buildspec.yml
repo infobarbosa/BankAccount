@@ -15,4 +15,4 @@ phases:
       - ls -latr
 artifacts:
   files:
-    - ./target/bankaccount-1.0-SNAPSHOT.jar bankaccount.jar
+    - ./target/bankaccount-1.0-SNAPSHOT.jar
