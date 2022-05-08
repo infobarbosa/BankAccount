@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto11
+  build:
+    commands:
+      - echo Build started on `date`
+      - mvn clean package
+  post_build:
+    commands:
+      - echo post build completed on `date`
+artifacts:
+  files:
+    - target/bankaccount-1.0-SNAPSHOT.jar bankaccount.jar
