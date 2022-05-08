@@ -25,6 +25,7 @@ public class TransactionServiceImpl implements TransactionService{
 
     public void process(Transaction transaction) {
         //TODO: 1. Verificar se a conta de débito é uma conta válida (existe e está ativa)
+        verityIfAccountIsValid(transaction.getCreditAccount());
         //TODO: 2. Verificar se a conta de débito tem saldo
 
         repository.save(transaction);
@@ -54,6 +55,7 @@ public class TransactionServiceImpl implements TransactionService{
     }
 
     private void processWithdraw(Transaction transaction) {
+        verifyIfAccountHaveFunds(transaction.getDebitAccount());
 
         BookEntry bookEntry = new BookEntry();
         bookEntry.setAccountId(transaction.getDebitAccount());
@@ -63,7 +65,7 @@ public class TransactionServiceImpl implements TransactionService{
     }
 
     private void processTransfer(Transaction transaction) {
-        //TODO: 3. verificar se a conta de débito tem saldo
+        verifyIfAccountHaveFunds(transaction.getDebitAccount());
 
         //Entrada de débito no livro razão
         BookEntry debitBookEntry = new BookEntry();
@@ -83,11 +85,11 @@ public class TransactionServiceImpl implements TransactionService{
     }
 
 
-    private void verityIfAccountIsValid(CheckingAccount account) throws InvalidAccountException{
+    private void verityIfAccountIsValid(Long accountId) throws InvalidAccountException{
         //TODO
     }
 
-    private void verifyIfAccountHaveFunds(CheckingAccount account) throws InsufficientFundsException{
+    private void verifyIfAccountHaveFunds(Long accountId) throws InsufficientFundsException{
         //TODO
     }
 }

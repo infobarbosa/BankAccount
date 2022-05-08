@@ -1,6 +1,6 @@
 package com.github.infobarbosa.bankaccount.exception;
 
-public class InsufficientFundsException extends Exception {
+public class InsufficientFundsException extends RuntimeException {
     private double amount;
     
     public InsufficientFundsException(double amount) {

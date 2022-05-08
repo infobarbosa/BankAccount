@@ -1,5 +1,5 @@
 package com.github.infobarbosa.bankaccount.exception;
 
-public class InvalidAccountException extends Exception{
+public class InvalidAccountException extends RuntimeException{
 
 }
