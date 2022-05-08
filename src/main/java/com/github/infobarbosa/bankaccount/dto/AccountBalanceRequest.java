@@ -1,6 +1,6 @@
 package com.github.infobarbosa.bankaccount.dto;
 
-public class AccountBalanceDTO {
+public class AccountBalanceRequest {
     private Float balance;
 
     public void setBalance(Float balance){

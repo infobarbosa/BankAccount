@@ -1,7 +1,7 @@
 package com.github.infobarbosa.bankaccount.repository;
 
-import com.github.infobarbosa.bankaccount.model.AccountStatus;
 import com.github.infobarbosa.bankaccount.model.CheckingAccount;
+import com.github.infobarbosa.bankaccount.model.enums.AccountStatus;
 
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -12,6 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface AccountRepository extends CrudRepository<CheckingAccount, Long>{
+    @Modifying
+    @Transactional
+    @Query("UPDATE CheckingAccount ACC SET ACC.description = :description WHERE ACC.id = :id")
+    int changeAccountDescription(@Param("id") Long id, @Param("description") String description);
  
     @Modifying
     @Transactional

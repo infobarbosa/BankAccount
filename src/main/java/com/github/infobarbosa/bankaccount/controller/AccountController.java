@@ -3,10 +3,12 @@ package com.github.infobarbosa.bankaccount.controller;
 import java.util.List;
 import java.util.Optional;
 
-import com.github.infobarbosa.bankaccount.dto.AccountBalanceDTO;
-import com.github.infobarbosa.bankaccount.dto.AccountStatusDTO;
-import com.github.infobarbosa.bankaccount.model.AccountStatus;
+import com.github.infobarbosa.bankaccount.dto.AccountBalanceRequest;
+import com.github.infobarbosa.bankaccount.dto.AccountDescriptionRequest;
+import com.github.infobarbosa.bankaccount.dto.AccountStatusRequest;
+import com.github.infobarbosa.bankaccount.dto.AccountPostRequest;
 import com.github.infobarbosa.bankaccount.model.CheckingAccount;
+import com.github.infobarbosa.bankaccount.model.enums.AccountStatus;
 import com.github.infobarbosa.bankaccount.service.AccountService;
 
 import org.slf4j.Logger;
@@ -20,26 +22,28 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @ResponseBody
+@RequestMapping(value="/accounts")
 public class AccountController {
     private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
 
     @Autowired
     private AccountService accountService;
 
-    @GetMapping(value = "/accounts", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CheckingAccount>> getAllAccounts(){
         logger.info("getAllAccounts chamado...");
         List<CheckingAccount> accountList = accountService.findAll();
         return new ResponseEntity<List<CheckingAccount>>(accountList, HttpStatus.OK);
     }
 
-    @GetMapping(value="/accounts/{accountId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value="/{accountId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<CheckingAccount> getAccountById(@PathVariable(name="accountId") Long accountId){
         Optional<CheckingAccount> optAccount = accountService.findById(accountId);
@@ -50,23 +54,35 @@ public class AccountController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping(value="/accounts")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<CheckingAccount> createAccount(@RequestBody CheckingAccount checkingAccount){
-        CheckingAccount acc = accountService.createAccount(checkingAccount);
+    public ResponseEntity<CheckingAccount> createAccount(@RequestBody AccountPostRequest checkingAccountPostRequest){
+
+        CheckingAccount acc = accountService.createAccount(
+            mapAccountRequestToCheckingAccount(checkingAccountPostRequest)    
+        );
         return new ResponseEntity<CheckingAccount>(acc, HttpStatus.CREATED);
     }
 
-    @PutMapping(value="/accounts/{id}")
+    private CheckingAccount mapAccountRequestToCheckingAccount(AccountPostRequest checkingAccountPostRequest) {
+        CheckingAccount acc = new CheckingAccount();
+        acc.setAccountStatus(AccountStatus.ACTIVE);
+        acc.setBalance(0F);
+        acc.setCustomerId(checkingAccountPostRequest.getCustomerId());
+        acc.setDescription(checkingAccountPostRequest.getDescription());
+        return acc;
+    }
+
+    @PutMapping(value="/{id}/description")
     @ResponseStatus(value = HttpStatus.OK)
-    public ResponseEntity<Void> updateAccount(@RequestBody CheckingAccount checkingAccount){
-        accountService.updateAccount(checkingAccount);
+    public ResponseEntity<Void> changeAccountDescription(@PathVariable(name = "id") Long accountId, @RequestBody AccountDescriptionRequest description){
+        accountService.changeAccountDescription(accountId, description.getDescription());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping(value="/accounts/{id}/status")
+    @PutMapping(value="/{id}/status")
     @ResponseStatus(value = HttpStatus.OK)
-    public ResponseEntity<Void> changeAccountStatus(@PathVariable(name = "id") Long accountId, @RequestBody AccountStatusDTO accountStatus){
+    public ResponseEntity<Void> changeAccountStatus(@PathVariable(name = "id") Long accountId, @RequestBody AccountStatusRequest accountStatus){
         logger.info("valor de accountStatus: " + accountStatus);
 
         Optional<CheckingAccount> opt = accountService.findById(accountId);
@@ -76,8 +92,8 @@ public class AccountController {
         }
 
         CheckingAccount acc = opt.get();
-        if( !acc.getAccountStatus().equals(accountStatus.getAccountStatus())){
-            switch (accountStatus.getAccountStatus()) {
+        if( !acc.getAccountStatus().equals(accountStatus.getStatus())){
+            switch (accountStatus.getStatus()) {
                 case ACTIVE:
                     accountService.activateAccount(accountId);
                     break;
@@ -93,9 +109,9 @@ public class AccountController {
         }
     }
 
-    @PutMapping(value="/accounts/{id}/balance")
+    @PutMapping(value="/{id}/balance")
     @ResponseStatus(value = HttpStatus.OK)
-    public ResponseEntity<Void> changeAccountBalance(@PathVariable(name = "id") Long accountId, @RequestBody AccountBalanceDTO balance){
+    public ResponseEntity<Void> changeAccountBalance(@PathVariable(name = "id") Long accountId, @RequestBody AccountBalanceRequest balance){
         Optional<CheckingAccount> oAcc = accountService.findById(accountId);
         if(!oAcc.isPresent()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -105,5 +121,4 @@ public class AccountController {
         accountService.changeAccountBalance(accountId, balance.getBalance());
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 }

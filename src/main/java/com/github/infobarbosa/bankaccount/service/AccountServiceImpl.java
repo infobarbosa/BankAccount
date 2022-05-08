@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import com.github.infobarbosa.bankaccount.exception.AccountNotFoundException;
-import com.github.infobarbosa.bankaccount.model.AccountStatus;
 import com.github.infobarbosa.bankaccount.model.CheckingAccount;
+import com.github.infobarbosa.bankaccount.model.enums.AccountStatus;
 import com.github.infobarbosa.bankaccount.repository.AccountRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,17 +35,16 @@ public class AccountServiceImpl implements AccountService{
     }
 
     @Override
-    public void updateAccount(CheckingAccount checkingAccount) {
-        repository.save(checkingAccount);
+    public void changeAccountDescription(Long accountId, String description) {
 
         //TODO: 1. validar se checkingAccount é válido
 
-        Optional<CheckingAccount> optionalAcc = repository.findById(checkingAccount.getId());
+        Optional<CheckingAccount> optionalAcc = repository.findById(accountId);
         if(optionalAcc.isPresent()){
-            repository.save(checkingAccount);
+            repository.changeAccountDescription(accountId, description);
         }
         else{
-            throw new AccountNotFoundException("Account not found: " + checkingAccount.getId());
+            throw new AccountNotFoundException("Account not found: " + accountId);
         }
     }
 
@@ -78,4 +77,5 @@ public class AccountServiceImpl implements AccountService{
         repository.changeAccountBalance(accountId, balance);
         
     }
+
 }

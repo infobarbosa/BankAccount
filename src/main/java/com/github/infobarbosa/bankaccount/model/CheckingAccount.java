@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.github.infobarbosa.bankaccount.model.enums.AccountStatus;
+
 @Entity
 @Table(name="TBL_ACCOUNTS")
 public class CheckingAccount {

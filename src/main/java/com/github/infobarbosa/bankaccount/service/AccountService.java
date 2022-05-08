@@ -12,7 +12,7 @@ public interface AccountService {
     public Optional<CheckingAccount> findById(Long accountId);
 
     public CheckingAccount createAccount(CheckingAccount checkingAccount);
-    public void updateAccount(CheckingAccount checkingAccount);
+    public void changeAccountDescription(Long accountId, String description);
     public void activateAccount(Long accountId);
     public void inactivateAccount(Long accountId);
 

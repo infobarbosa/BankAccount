@@ -1,8 +1,8 @@
 package com.github.infobarbosa.bankaccount.config;
 
-import com.github.infobarbosa.bankaccount.model.AccountStatus;
 import com.github.infobarbosa.bankaccount.model.CheckingAccount;
 import com.github.infobarbosa.bankaccount.model.Customer;
+import com.github.infobarbosa.bankaccount.model.enums.AccountStatus;
 import com.github.infobarbosa.bankaccount.repository.AccountRepository;
 import com.github.infobarbosa.bankaccount.repository.CustomerRepository;
 

@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.github.infobarbosa.bankaccount.model.enums.TransactionType;
+
 @Entity
 @Table(name="TBL_TRANSACTIONS")
 public class Transaction {
