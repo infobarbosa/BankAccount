@@ -8,5 +8,6 @@ apt-get update -y && \
 apt-get install default-jre -y
 
 ADD ./target/bankaccount-1.0-SNAPSHOT.jar account.jar
+EXPOSE 8080
 
-CMD java -jar account.jar
+ENTRYPOINT [ "java", "-jar", "account.jar" ]
